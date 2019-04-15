@@ -3,7 +3,8 @@
             [clojure.data.json :as json]
             [clojure.tools.deps.alpha :as deps]
             [clojure.tools.deps.alpha.util.maven :as mvn]
-            [nvd.core]))
+            [nvd.core])
+  (:import [java.io File]))
 
 (def temp-file (java.io.File/createTempFile ".deps-nvd_" ".json"))
 
@@ -15,10 +16,11 @@
            (deps/resolve-deps {}))
        vals (mapcat :paths) distinct))
 
-(defn -main [deps-file command & args]
-  (let [config       (-> deps-file slurp edn/read-string :nvd)
+(defn -main [command & args]
+  (let [deps-file    "deps.edn"
+        config       (-> deps-file slurp edn/read-string :nvd)
         path         (.getAbsolutePath temp-file)
-        project-name "fix"
+        project-name (-> (File. "deps.edn") .getAbsoluteFile .getParentFile .getName)
         opts         (merge
                       (select-keys config [:group :version :nvd])
                       {:name      project-name
