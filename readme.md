@@ -7,7 +7,7 @@ achieved by wrapping
 [nvd-clojure](https://github.com/rm-hull/lein-nvd) which is a
 Leiningen plugin.
 
-# Usage
+## Usage
 
 Add this alias to your `deps.edn` file:
 
@@ -29,12 +29,12 @@ of vulnerabilities for your project. See
 [lein-nvd](https://github.com/rm-hull/lein-nvd) for more details on
 other tasks such as `purge` and `update` and their parameters.
 
-# Limitations
+## Limitations
 
 Only JAR dependencies are checked, it is not possible to check git
 dependencies.
 
-# License
+## License
 
 The MIT License (MIT)
 
